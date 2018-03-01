@@ -4,7 +4,7 @@ project(mbedtls_SGX "C" "CXX")
 
 set(MBEDTLS_VERSION 2.6.0)
 
-set(SGX_SDK /opt/intel/sgxsdk)
+set(SGX_SDK /home/jiao/sgxsdk)
 set(SGX_ARCH x64)
 set(SGX_MODE SIM CACHE STRING "SGX mode: SIM or HW") # SGX mode: sim, hw
 set(COMPILE_EXAMPLES NO CACHE BOOL "Build examples")
