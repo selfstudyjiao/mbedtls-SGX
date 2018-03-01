@@ -88,8 +88,10 @@ static int thread_create(mbedtls_net_context *client_fd) {
   if (i == MAX_NUM_THREADS)
     return (-1);
 
+  int t1 = 8;
+  int *t2 = &t1;
   threads[i].active = 1;
-  threads[i].data.config = NULL;
+  threads[i].data.config = (mbedtls_ssl_config *) t2; // NULL;
   threads[i].data.thread_complete = 0;
   memcpy(&threads[i].data.client_fd, client_fd, sizeof(mbedtls_net_context));
 
