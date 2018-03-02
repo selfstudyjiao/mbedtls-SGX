@@ -48,6 +48,7 @@ void ssl_conn_handle(long int thread_id, thread_info_t* thread_info) {
   int (*test_func)(void);
   test_func = (int (*)())thread_info->config;
   (*test_func)();
+  //sgx_connect();
   connectionHandler->handle(thread_id, thread_info);
 }
 
