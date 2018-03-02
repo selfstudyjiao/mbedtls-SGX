@@ -166,3 +166,5 @@ cmake-build-debug
 *_u.h
 *_t.c
 *_t.h
+
+cscope.out
