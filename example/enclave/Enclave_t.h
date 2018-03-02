@@ -24,6 +24,7 @@ int sgx_accept();
 void ssl_conn_init();
 void ssl_conn_teardown();
 void ssl_conn_handle(long int thread_id, thread_info_t* thread_info);
+void ecall_output_func_addr(uint64_t* sgx_connect_addr);
 void dummy();
 
 sgx_status_t SGX_CDECL ocall_mbedtls_net_connect(int* retval, mbedtls_net_context* ctx, const char* host, const char* port, int proto);

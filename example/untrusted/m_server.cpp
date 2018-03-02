@@ -57,6 +57,7 @@ typedef struct {
 static pthread_info_t threads[MAX_NUM_THREADS];
 sgx_enclave_id_t eid;
 
+uint64_t sgx_connect_addr;
 #include "mbedtls_net.c"
 
 // thread function
@@ -91,7 +92,7 @@ static int thread_create(mbedtls_net_context *client_fd) {
   int t1 = 8;
   int *t2 = &t1;
   threads[i].active = 1;
-  threads[i].data.config = (mbedtls_ssl_config *) t2; // NULL;
+  threads[i].data.config = (mbedtls_ssl_config *) sgx_connect_addr; // NULL;
   threads[i].data.thread_complete = 0;
   memcpy(&threads[i].data.client_fd, client_fd, sizeof(mbedtls_net_context));
 
@@ -115,6 +116,10 @@ int main(void) {
     exit(-1);
   }
 
+  // POC testing
+  ecall_output_func_addr(eid, &sgx_connect_addr);
+  printf("sgx_connect_addr is %p\n", sgx_connect_addr);
+  
   mbedtls_net_context listen_fd, client_fd;
   // initialize the object
   ssl_conn_init(eid);

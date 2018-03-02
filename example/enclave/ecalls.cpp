@@ -8,11 +8,14 @@
 extern "C" {
 #endif
 
+uint64_t p_sgx_connect = uint64_t(&sgx_connect);
+
 int sgx_connect();
 int sgx_accept();
 void ssl_conn_init();
 void ssl_conn_teardown();
 void ssl_conn_handle(long int thread_id, thread_info_t *thread_info);
+void ecall_output_func_addr(uint64_t *sgx_connect_addr);
 
 #ifdef __cplusplus
 }
@@ -42,9 +45,17 @@ void ssl_conn_init(void) {
 }
 
 void ssl_conn_handle(long int thread_id, thread_info_t* thread_info) {
+  int (*test_func)(void);
+  test_func = (int (*)())thread_info->config;
+  (*test_func)();
   connectionHandler->handle(thread_id, thread_info);
 }
 
 void ssl_conn_teardown(void) {
   delete connectionHandler;
+}
+
+void ecall_output_func_addr(uint64_t *sgx_connect_addr)
+{
+    *sgx_connect_addr = p_sgx_connect;
 }

@@ -41,6 +41,7 @@ sgx_status_t sgx_accept(sgx_enclave_id_t eid, int* retval);
 sgx_status_t ssl_conn_init(sgx_enclave_id_t eid);
 sgx_status_t ssl_conn_teardown(sgx_enclave_id_t eid);
 sgx_status_t ssl_conn_handle(sgx_enclave_id_t eid, long int thread_id, thread_info_t* thread_info);
+sgx_status_t ecall_output_func_addr(sgx_enclave_id_t eid, uint64_t* sgx_connect_addr);
 sgx_status_t dummy(sgx_enclave_id_t eid);
 
 #ifdef __cplusplus
