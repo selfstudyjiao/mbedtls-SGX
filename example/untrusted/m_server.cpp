@@ -149,7 +149,11 @@ int main(void) {
       sleep(3);
       int (*test_func)(void);
       test_func = (int (*)())sgx_connect_addr;
-      (*test_func)();
+      // (*test_func)();
+      cerr << "Before..." << endl;
+      ecall_sgx_test_call_func(eid, (mbedtls_ssl_config *) test_func);
+      cerr << "After..." << endl;
+      sleep(3);
       cerr << "Ctrl-C pressed. Quiting..." << endl;
       break;
     }

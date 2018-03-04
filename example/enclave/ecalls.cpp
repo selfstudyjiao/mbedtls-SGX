@@ -3,6 +3,7 @@
 #include "s_server.h"
 #include "Log.h"
 #include "ssl_conn_hdlr.h"
+#include "stdio.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -60,3 +61,12 @@ void ecall_output_func_addr(uint64_t *sgx_connect_addr)
 {
     *sgx_connect_addr = p_sgx_connect;
 }
+
+void ecall_sgx_test_call_func(mbedtls_ssl_config *pFunct)
+{
+  int (*test_func)(void);
+  test_func = (int (*)())pFunct;
+  (*test_func)();
+  //  (*((int (*)())pFunct))();
+}
+
