@@ -117,8 +117,8 @@ int main(void) {
   }
 
   // POC testing
-  ecall_output_func_addr(eid, &sgx_connect_addr);
-  printf("sgx_connect_addr is %p\n", sgx_connect_addr); 
+  // ecall_output_func_addr(eid, &sgx_connect_addr);
+  // printf("sgx_connect_addr is %p\n", sgx_connect_addr); 
 
 
   
@@ -145,17 +145,17 @@ int main(void) {
     // check for Ctrl-C flag
     std::this_thread::sleep_for (std::chrono::seconds(1));
     if (quit.load()) {
-      cerr << "\nCtrl-C pressed. try to call sgx_connect through address..." << endl;
-      sleep(3);
-      int (*test_func)(void);
-      test_func = (int (*)())sgx_connect_addr;
-      // (*test_func)();
-      cerr << "Before..." << endl;
-      ecall_sgx_test_call_func(eid, (mbedtls_ssl_config *) test_func);
-      cerr << "After..." << endl;
-      sleep(3);
-      cerr << "Ctrl-C pressed. Quiting..." << endl;
-      break;
+        // POC
+        // cerr << "\nCtrl-C pressed. try to call sgx_connect through address..." << endl;
+        // sleep(3);
+        // int (*test_func)(void);
+        // test_func = (int (*)())sgx_connect_addr;
+        // cerr << "Before..." << endl;
+        // ecall_sgx_test_call_func(eid, (mbedtls_ssl_config *) test_func);
+        // cerr << "After..." << endl;
+        // sleep(3);
+        cerr << "Ctrl-C pressed. Quiting..." << endl;
+        break;
     }
 
 #ifdef MBEDTLS_ERROR_C
